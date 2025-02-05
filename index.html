@@ -7,22 +7,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="game-container">
+        <h1>Color Guessing Game</h1>
+        <div id="colorBox" data-testid="colorBox"></div>
+        
+        <p data-testid="gameInstructions">
+            Guess which color option matches the color in the box above!
+        </p>
+        
+        <div class="color-options">
+            <div class="color-option" data-testid="colorOption"></div>
+            <div class="color-option" data-testid="colorOption"></div>
+            <div class="color-option" data-testid="colorOption"></div>
+            <div class="color-option" data-testid="colorOption"></div>
+            <div class="color-option" data-testid="colorOption"></div>
+            <div class="color-option" data-testid="colorOption"></div>
+        </div>
+        
+        <p id="gameStatus" data-testid="gameStatus"></p>
+        <p>Score: <span id="score" data-testid="score">0</span></p>
+        
+        <button id="newGameButton" data-testid="newGameButton">New Game</button>
+    </div>
 
-<div class="container">
-    <h1>Joshua's Color Guessing Game</h1>
-    <p>Guess the correct color from the options below!</p>
-    
-    <div class="color-box" id="colorBox"></div>
-    
-    <div class="status" id="gameStatus"></div>
-    <div class="score">Score: <span id="score">0</span></div>
-
-    <div class="options" id="colorOptions"></div>
-
-    <button class="new-game" onclick="startNewGame()">New Game</button>
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>

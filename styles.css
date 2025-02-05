@@ -1,74 +1,60 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     margin: 0;
-    padding: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
 }
 
-.container {
+.game-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px;
     max-width: 500px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.color-box {
     width: 100%;
+}
+
+#colorBox {
+    width: 200px;
     height: 150px;
-    margin: 20px 0;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 0 auto 20px;
+    border: 2px solid #333;
 }
 
-.status {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.score {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.color-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
 
-.option {
-    height: 60px;
-    border: none;
+.color-option {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #333;
     cursor: pointer;
-    border-radius: 6px;
     transition: transform 0.2s;
 }
 
-.option:hover {
+.color-option:hover {
     transform: scale(1.1);
 }
 
-.new-game {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    background-color: blue;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+#gameStatus {
+    margin: 15px 0;
+    font-weight: bold;
 }
 
-.new-game:hover {
-    background-color: darkblue;
+#newGameButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
 }

@@ -1,57 +1,55 @@
-let targetColor = "";
-let score = 0;
+// Color options
+const colors = [
+    '#FF6B6B', '#4ECDC4', '#45B7D1', 
+    '#FDCB6E', '#6C5CE7', '#A8E6CF'
+];
 
-function generateRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+// Game elements
+const colorBox = document.querySelector('[data-testid="colorBox"]');
+const colorOptions = document.querySelectorAll('[data-testid="colorOption"]');
+const gameStatus = document.getElementById('gameStatus');
+const scoreElement = document.getElementById('score');
+const newGameButton = document.getElementById('newGameButton');
 
-function generateColorOptions(target) {
-    const options = [target];
-    while (options.length < 6) {
-        const newColor = generateRandomColor();
-        if (!options.includes(newColor)) {
-            options.push(newColor);
-        }
-    }
-    return options.sort(() => Math.random() - 0.5);
-}
+let correctColor, score = 0;
 
-function startNewGame() {
-    targetColor = generateRandomColor();
-    document.getElementById("colorBox").style.backgroundColor = targetColor;
-    document.getElementById("gameStatus").textContent = "";
+function initializeGame() {
+    // Choose target color
+    correctColor = colors[Math.floor(Math.random() * colors.length)];
+    colorBox.style.backgroundColor = correctColor;
 
-    const colorOptions = generateColorOptions(targetColor);
-    const optionsContainer = document.getElementById("colorOptions");
-    optionsContainer.innerHTML = "";
-
-    colorOptions.forEach(color => {
-        const button = document.createElement("button");
-        button.className = "option";
-        button.style.backgroundColor = color;
-        button.onclick = () => handleColorSelect(color);
-        optionsContainer.appendChild(button);
+    // Randomize color options
+    const shuffledColors = [...colors].sort(() => 0.5 - Math.random());
+    colorOptions.forEach((option, index) => {
+        option.style.backgroundColor = shuffledColors[index];
+        option.onclick = () => checkGuess(shuffledColors[index]);
     });
+
+    // Reset status
+    gameStatus.textContent = '';
 }
 
-function handleColorSelect(selectedColor) {
-    const statusElement = document.getElementById("gameStatus");
-
-    if (selectedColor === targetColor) {
+function checkGuess(selectedColor) {
+    if (selectedColor === correctColor) {
+        gameStatus.textContent = 'Correct! 🎉';
+        gameStatus.style.color = 'green';
         score++;
-        document.getElementById("score").textContent = score;
-        statusElement.textContent = "Correct! Well done!";
-        statusElement.style.color = "green";
-        setTimeout(startNewGame, 1500);
+        scoreElement.textContent = score;
     } else {
-        statusElement.textContent = "Wrong guess, try again!";
-        statusElement.style.color = "red";
+        gameStatus.textContent = 'Wrong! Try again 😔';
+        gameStatus.style.color = 'red';
     }
+
+    // Start new round after a short delay
+    setTimeout(initializeGame, 1500);
 }
 
-startNewGame();
+// Event listeners
+newGameButton.onclick = () => {
+    score = 0;
+    scoreElement.textContent = score;
+    initializeGame();
+};
+
+// Initialize first game
+initializeGame();
